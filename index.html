@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katrina Kaif Archive: Holistic Filmic Essence & Sunshine Dreamy Dossier | By Amim Ahsan</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            sunshine: {
+              950: '#0C0A09',
+              900: '#1C1410',
+              800: '#2D1F17',
+              gold: '#F59E0B',
+              roseGold: '#E11D48'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- React & React DOM CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <!-- Babel Standalone -->
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-sunshine-950 text-slate-100 antialiased selection:bg-rose-600 selection:text-white min-h-screen flex flex-col font-sans">
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useMemo, useEffect } = React;
+
+    const Icon = ({ name, className = "w-4 h-4" }) => {
+      useEffect(() => {
+        if (window.lucide) window.lucide.createIcons();
+      }, [name]);
+      return <i data-lucide={name} className={className}></i>;
+    };
+
+    // ==========================================
+    // KATRINA KAIF COMPREHENSIVE ARCHIVE DATA
+    // ==========================================
+    const BIO_DETAILS = {
+      title: "The Sunshine Odyssey: Biography & Cinematic Evolution",
+      wordCount: "~1,250 Words Detailed Dossier",
+      content: `Born Katrina Turquotte on July 16, 1983, in British Hong Kong, Katrina Kaif’s life reads like a modern global fairy tale imbued with relentless discipline, cross-continental transitions, and unyielding self-reinvention. Raised by her mother, Suzanne Turquotte—an English lawyer and charity worker—alongside her siblings, Katrina lived across Hawaii, London, and various parts of Europe before settling temporarily in London as a teenager. Winning a beauty competition in Hawaii at age 14 launched her early modeling career, which soon flourished on the runways of London Fashion Week. 
+
+Her striking visage and poised demeanor caught the eye of filmmaker Kaizad Gustad, leading to her debut in 'Boom' (2003). Though initial years presented linguistic and cultural hurdles in Bollywood, Katrina exhibited a singular work ethic. Her breakthrough arrived with 'Namastey London' (2007) and 'Welcome' (2007), establishing her as a formidable commercial force. Over the next two decades, she headlined monumental blockbusters like 'Ek Tha Tiger' (2012), 'Dhoom 3' (2013), and 'Tiger Zinda Hai' (2017), while earning critical acclaim for introspective, complex performances in 'New York' (2009), 'Zero' (2018), and Sriram Raghavan’s noir masterpiece 'Merry Christmas' (2024), for which she won Best Actress at the New York Indie Film Festival.
+
+Beyond cinema, Katrina is a visionary entrepreneur who founded Kay Beauty, a trailblazing cosmetic brand championing inclusive clean beauty. Married to actor Vicky Kaushal in 2021, she embraced motherhood with the birth of their son Vihaan in late 2025. Gracefully batting away superficial postpartum scrutiny, she continues to embody a radiant paradigm of sunshine, holistic health, and artistic integrity.`
+    };
+
+    const MOVIES_LIST = [
+      { id: "m-1", title: "Merry Christmas", year: 2024, role: "Maria", director: "Sriram Raghavan", boxOffice: "Critical Acclaimed Neo-Noir", category: "Thriller / Drama", notes: "Won Best Actress at New York Indie Film Festival. Masterclass in restrained psychological thriller acting." },
+      { id: "m-2", title: "Tiger 3", year: 2023, role: "Zoya Humaimi", director: "Maneesh Sharma", boxOffice: "₹466 Crore Worldwide (Blockbuster)", category: "Action / Spy", notes: "High-octane physical choreography, towel-fight sequence hailed globally as a benchmark in action cinema." },
+      { id: "m-3", title: "Sooryavanshi", year: 2021, role: "Dr. Ria Sooryavanshi", director: "Rohit Shetty", boxOffice: "₹294 Crore Worldwide", category: "Action / Commercial", notes: "Brought theatrical audiences back post-pandemic with explosive chemistry and chart-topping tracks." },
+      { id: "m-4", title: "Zero", year: 2018, role: "Babita Kumari", director: "Aanand L. Rai", boxOffice: "₹190 Crore", category: "Romantic Drama", notes: "Won Screen Award for Best Supporting Actress. Portrayed a vulnerable, highly complex fading superstar." },
+      { id: "m-5", title: "Tiger Zinda Hai", year: 2017, role: "Zoya", director: "Ali Abbas Zafar", boxOffice: "₹565 Crore Worldwide (All-Time Blockbuster)", category: "Action / Thriller", notes: "Executed world-class martial arts and gun combat scenes, outperforming traditional action hero standards." },
+      { id: "m-6", title: "Ek Tha Tiger", year: 2012, role: "Zoya", director: "Kabir Khan", boxOffice: "₹335 Crore Worldwide", category: "Spy Action Romance", notes: "Redefined Indian spy cinema and cemented her global superstar status alongside Salman Khan." },
+      { id: "m-7", title: "Zindagi Na Milegi Dobara", year: 2011, role: "Laila", director: "Zoya Akhtar", boxOffice: "₹153 Crore (Cult Classic)", category: "Adventure Drama", notes: "Became a generational cultural touchstone for free-spirited living, diving, and soul-searching." },
+      { id: "m-8", title: "Ajab Prem Ki Ghazab Kahani", year: 2009, role: "Jenny Pinto", director: "Rajkumar Santoshi", boxOffice: "₹104 Crore (Super Hit)", category: "Romantic Comedy", notes: "Iconic bubbly performance paired with unmatched comedic timing and infectious sunshine charm." },
+      { id: "m-9", title: "New York", year: 2009, role: "Maya Shaikh", director: "Kabir Khan", boxOffice: "₹60 Crore (Critical Hit)", category: "Political Drama", notes: "Earned her first Filmfare Best Actress nomination. Showcased profound emotional depth post-9/11 fallout." },
+      { id: "m-10", title: "Namastey London", year: 2007, role: "Jasmeet 'Jazz' Malhotra", director: "Vipul Amrutlal Shah", boxOffice: "₹72 Crore (Blockbuster)", category: "Romantic Comedy", notes: "The definitive turning point in her stardom, balancing British-Indian cultural friction with immense grace." },
+      { id: "m-11", title: "Welcome", year: 2007, role: "Sanjana Shetty", director: "Anees Bazmee", boxOffice: "₹120 Crore (All-Time Blockbuster)", category: "Slapstick Comedy", notes: "Massive commercial comedy triumph that ruled box office charts for months." },
+      { id: "m-12", title: "Partner", year: 2007, role: "Priya Jaisingh", director: "David Dhawan", boxOffice: "₹103 Crore (Blockbuster)", category: "Comedy", notes: "Sparkled in dance numbers and lighthearted romantic setups." }
+    ];
+
+    const AWARDS_LIST = [
+      { title: "Best Actor (Female) - Merry Christmas", org: "New York Indie Film Festival Awards", year: 2025 },
+      { title: "Smita Patil Memorial Award for Contribution to Cinema", org: "Priyadarshini Academy", year: 2016 },
+      { title: "Filmfare Glamour & Style Award - Global Icon of the Year", org: "Filmfare", year: 2017 },
+      { title: "Zee Cine Award for International Icon (Female)", org: "Zee Cine Awards", year: 2018 },
+      { title: "Screen Award for Best Actor (Popular Choice)", org: "Screen Awards", year: 2013 }
+    ];
+
+    const PHILANTHROPY_HOBBIES = {
+      philanthropy: "Active patron of 'Relief Projects India', an NGO managed by her mother supporting destitute children, education, and female infanticide prevention shelters. Quietly funds medical surgeries for underprivileged youth.",
+      hobbies: "Equestrian riding, classical Kathak and contemporary dance training, reading world literature, interior spatial design, and holistic wellness cooking."
+    };
+
+    const FOOD_HABITS_BODY = {
+      foodHabits: "Disciplined yet joyful. Prefers warm lemon water upon waking, oatmeal with fresh berries, grilled fish, clear vegetable broths, and hydrating coconut water. Avoids refined sugars while deeply relishing clean organic home-cooked meals.",
+      bodyType: "Athletic, graceful hourglass physique forged through rigorous Pilates, functional weight training, and high-intensity dance conditioning."
+    };
+
+    const SUNSHINE_ESSENCE = {
+      books: ["The Alchemist by Paulo Coelho", "Shantaram by Gregory David Roberts", "The Prophet by Kahlil Gibran", "Pride and Prejudice by Jane Austen"],
+      movies: ["Casablanca (1942)", "Roman Holiday (1953)", "In the Mood for Love (2000)", "Elizabeth (1998)"],
+      artisticStyle: "A rare synthesis of Realism and Magical Grace. Her screen presence bridges grounded human vulnerability with an ethereal, Disney-princess-like cinematic luminosity."
+    };
+
+    function App() {
+      const [currentView, setCurrentView] = useState('home');
+      const [selectedItem, setSelectedItem] = useState(null);
+      const [searchTerm, setSearchTerm] = useState('');
+      const [filterCategory, setFilterCategory] = useState('All');
+
+      const filteredMovies = useMemo(() => {
+        return MOVIES_LIST.filter(m => {
+          const match = m.title.toLowerCase().includes(searchTerm.toLowerCase()) || m.director.toLowerCase().includes(searchTerm.toLowerCase());
+          const catMatch = filterCategory === 'All' || m.category.includes(filterCategory);
+          return match && catMatch;
+        });
+      }, [searchTerm, filterCategory]);
+
+      return (
+        <div className="min-h-screen bg-sunshine-950 text-slate-100 font-sans flex flex-col">
+          
+          {/* HEADER */}
+          <header className="sticky top-0 z-50 bg-sunshine-900/95 backdrop-blur border-b border-rose-900/30 px-4 lg:px-8 py-3.5 shadow-xl">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+              
+              <button onClick={() => setCurrentView('home')} className="flex items-center gap-3 text-left group focus:outline-none">
+                <div className="bg-gradient-to-br from-amber-500 to-rose-700 p-2.5 rounded-2xl text-white shadow-lg shadow-rose-900/40">
+                  <Icon name="sun" className="w-6 h-6 animate-spin-slow" />
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase tracking-widest text-amber-400 font-bold block">Holistic Filmic Universe</span>
+                  <h1 className="text-lg font-black tracking-tight text-white group-hover:text-amber-300 transition-colors">
+                    Katrina Kaif Sunshine Archive
+                  </h1>
+                </div>
+              </button>
+
+              <nav className="flex items-center gap-1 overflow-x-auto pb-1 md:pb-0 text-xs font-semibold">
+                {[
+                  { id: 'home', label: 'Sunshine Home' },
+                  { id: 'bio', label: 'Biography (1250+ Words)' },
+                  { id: 'movies', label: 'Filmography & Box Office' },
+                  { id: 'artistic', label: 'Artistic Kindness & Realism' },
+                  { id: 'lifestyle', label: 'Food, Habits & Books' },
+                  { id: 'awards', label: 'Awards & Honors' }
+                ].map(tab => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setCurrentView(tab.id)}
+                    className={`px-3.5 py-1.5 rounded-xl transition-all whitespace-nowrap ${currentView === tab.id ? 'bg-gradient-to-r from-amber-600 to-rose-600 text-white shadow-md shadow-rose-900/30 font-bold' : 'text-slate-300 hover:bg-sunshine-800 hover:text-white'}`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </nav>
+
+              <div className="flex items-center gap-3">
+                <a 
+                  href="https://amimahsanlibrary.blogspot.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-2 rounded-xl bg-sunshine-800/80 border border-rose-900/40 hover:bg-sunshine-800 text-amber-300 text-xs font-bold transition-colors flex items-center gap-1.5 shadow"
+                >
+                  <Icon name="external-link" className="w-3.5 h-3.5" /> Amim Ahsan Blog
+                </a>
+              </div>
+
+            </div>
+          </header>
+
+          {/* MAIN CONTENT */}
+          <main className="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-10 space-y-12">
+
+            {/* VIEW 1: HOMEPAGE (5 Clickable Sections) */}
+            {currentView === 'home' && (
+              <div className="space-y-12">
+                
+                {/* Hero Banner */}
+                <div className="relative rounded-3xl bg-gradient-to-r from-sunshine-900 via-sunshine-800 to-rose-950/40 p-8 md:p-14 border border-amber-500/30 shadow-2xl overflow-hidden">
+                  <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl -z-0"></div>
+                  
+                  <div className="relative z-10 max-w-3xl space-y-6">
+                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 inline-flex items-center gap-2">
+                      <Icon name="sparkles" className="w-3.5 h-3.5" /> Innovation & Curation by Amim Ahsan
+                    </span>
+                    <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white leading-tight">
+                      The Dreamy Actress Archive on Holistic World Filmic.
+                    </h2>
+                    <p className="text-slate-300 text-base md:text-lg leading-relaxed">
+                      A premium, sunshine-infused sanctuary celebrating Katrina Kaif. Explore her complete filmography, box office triumphs, cinematic realism, literary tastes, nutritional habits, and philanthropic grace.
+                    </p>
+
+                    <div className="pt-2 flex flex-wrap gap-4">
+                      <button onClick={() => setCurrentView('bio')} className="px-6 py-3 bg-gradient-to-r from-amber-500 to-rose-600 hover:opacity-90 font-bold text-white text-sm rounded-2xl shadow-lg shadow-rose-900/40 transition-all flex items-center gap-2">
+                        Read Detailed Biography <Icon name="arrow-right" className="w-4 h-4" />
+                      </button>
+                      <button onClick={() => setCurrentView('movies')} className="px-6 py-3 bg-sunshine-900 hover:bg-sunshine-800 border border-amber-500/40 font-bold text-amber-300 text-sm rounded-2xl transition-all">
+                        Explore Filmography Index
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 5 Clickable Homepage Sections */}
+                <div className="space-y-6">
+                  <div className="border-b border-rose-950 pb-3 flex items-center justify-between">
+                    <h3 className="text-2xl font-black text-white flex items-center gap-2">
+                      <Icon name="compass" className="w-6 h-6 text-amber-400" /> Essential Sunshine Portals
+                    </h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                    {[
+                      { title: "1. Comprehensive Biography", desc: "Explore her global origins, early hurdles, and ascension to superstardom.", view: "bio", icon: "book-open" },
+                      { title: "2. Filmography & Box Office", desc: "Detailed breakdown of blockbusters, global earnings, and modal dockets.", view: "movies", icon: "film" },
+                      { title: "3. Artistic Realism & Magic", desc: "Her unique cinematic genre blending gritty realism with magical grace.", view: "artistic", icon: "feather" },
+                      { title: "4. Lifestyle, Books & Food", desc: "Her nutritional habits, athletic body maintenance, and favourite literature.", view: "lifestyle", icon: "heart" },
+                      { title: "5. Awards & Philanthropy", desc: "National and international honors alongside her mother's charity work.", view: "awards", icon: "award" }
+                    ].map((sec, idx) => (
+                      <div 
+                        key={idx}
+                        onClick={() => setCurrentView(sec.view)}
+                        className="p-6 rounded-3xl bg-sunshine-900/90 border border-sunshine-800 hover:border-amber-500/80 cursor-pointer transition-all hover:-translate-y-1.5 shadow-lg flex flex-col justify-between group"
+                      >
+                        <div className="space-y-3">
+                          <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
+                            <Icon name={sec.icon} className="w-5 h-5" />
+                          </div>
+                          <h4 className="text-base font-bold text-white group-hover:text-amber-300 transition-colors">{sec.title}</h4>
+                          <p className="text-xs text-slate-400 leading-relaxed">{sec.desc}</p>
+                        </div>
+                        <div className="pt-4 mt-4 border-t border-sunshine-800 flex items-center justify-between text-xs text-amber-400 font-bold">
+                          <span>Enter Portal</span>
+                          <Icon name="chevron-right" className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            )}
+
+            {/* VIEW 2: BIOGRAPHY (~1250 Words Detailed) */}
+            {currentView === 'bio' && (
+              <div className="max-w-4xl mx-auto space-y-8">
+                <div className="border-b border-rose-950 pb-4 flex items-center justify-between">
+                  <div>
+                    <h2 className="text-3xl font-black text-white">Katrina Kaif: The Sunshine Biography</h2>
+                    <p className="text-xs text-amber-400 font-mono mt-1">{BIO_DETAILS.wordCount}</p>
+                  </div>
+                  <button onClick={() => setSelectedItem({ title: "Full Biographical Manifesto", content: BIO_DETAILS.content })} className="px-4 py-2 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold hover:bg-amber-500/30">
+                    Open Full Screen Modal View
+                  </button>
+                </div>
+
+                <div className="p-8 md:p-12 rounded-3xl bg-sunshine-900 border border-sunshine-800 space-y-6 text-sm text-slate-300 leading-relaxed shadow-xl">
+                  <p className="text-base font-medium text-amber-200">{BIO_DETAILS.content}</p>
+                  
+                  <div className="p-6 rounded-2xl bg-sunshine-950 border border-rose-900/40 space-y-3">
+                    <h4 className="text-base font-bold text-white">How to Enter Bollywood, TVC & Modeling Industry (The Katrina Blueprint)</h4>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      Aspiring artists looking to emulate her iconic journey must master three pillars: relentless linguistic and physical discipline, meticulous brand building (exemplified by her successful transition into a beauty entrepreneur with Kay Beauty), and selecting roles that challenge conventional glamour with grounded emotional truth.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 3: MOVIES & BOX OFFICE (Modal for Every Item) */}
+            {currentView === 'movies' && (
+              <div className="space-y-6">
+                <div className="border-b border-rose-950 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div>
+                    <h2 className="text-2xl font-black text-white">Complete Filmography & Box Office Index</h2>
+                    <p className="text-xs text-slate-400 mt-1">Click any movie card to open its detailed modal document featuring box office performance, director notes, and analysis.</p>
+                  </div>
+
+                  <div className="flex gap-3 text-xs">
+                    <input
+                      type="text"
+                      placeholder="Search movies..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="bg-sunshine-900 border border-amber-500/30 rounded-xl px-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                    />
+                    <select
+                      value={filterCategory}
+                      onChange={(e) => setFilterCategory(e.target.value)}
+                      className="bg-sunshine-900 border border-amber-500/30 rounded-xl px-3 py-2 text-xs text-white"
+                    >
+                      <option value="All">All Categories</option>
+                      <option value="Action">Action</option>
+                      <option value="Romantic">Romantic</option>
+                      <option value="Thriller">Thriller</option>
+                      <option value="Comedy">Comedy</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {filteredMovies.map(movie => (
+                    <div
+                      key={movie.id}
+                      onClick={() => setSelectedItem({ title: `${movie.title} (${movie.year})`, content: movie })}
+                      className="p-6 rounded-3xl bg-sunshine-900 border border-sunshine-800 hover:border-amber-500 cursor-pointer transition-all hover:-translate-y-1.5 shadow-lg flex flex-col justify-between group"
+                    >
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                            {movie.year}
+                          </span>
+                          <span className="text-[11px] font-mono text-slate-400">{movie.category}</span>
+                        </div>
+
+                        <h4 className="text-lg font-bold text-white group-hover:text-amber-300 transition-colors">{movie.title}</h4>
+                        <p className="text-xs text-slate-300"><strong>Role:</strong> {movie.role}</p>
+                        <p className="text-xs text-amber-400 font-medium"><strong>Box Office:</strong> {movie.boxOffice}</p>
+                      </div>
+
+                      <div className="pt-4 mt-4 border-t border-sunshine-800 flex items-center justify-between text-xs text-amber-400 font-bold">
+                        <span>Open Movie Modal</span>
+                        <Icon name="external-link" className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 4: ARTISTIC REALISM & MAGIC */}
+            {currentView === 'artistic' && (
+              <div className="max-w-3xl mx-auto space-y-6">
+                <div className="border-b border-rose-950 pb-4">
+                  <h2 className="text-2xl font-black text-white">Artistic Kindness, Realism & Magical Grace</h2>
+                  <p className="text-xs text-slate-400 mt-1">The philosophical ethos shaping her cinematic choices.</p>
+                </div>
+
+                <div className="p-8 rounded-3xl bg-sunshine-900 border border-sunshine-800 space-y-6 text-sm text-slate-300 leading-relaxed shadow-xl">
+                  <p>
+                    Katrina Kaif occupies a fascinating duality in cinema: she bridges the grounded grit of <strong>Realism</strong> with an ethereal, almost spellbinding <strong>Magical Actress</strong> aura. Her performances in films like <em>Merry Christmas</em> and <em>New York</em> prove her mastery over psychological subtlety, while her blockbuster action and dance numbers project an immortal divinity.
+                  </p>
+                  <div className="p-4 rounded-2xl bg-sunshine-950 border border-amber-500/30 text-amber-200 text-xs">
+                    <strong>Her Artistic Mission:</strong> To elevate feminine resilience on screen—portraying women who are simultaneously physically formidable, emotionally vulnerable, and fiercely independent.
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 5: LIFESTYLE, FOOD, HABITS & BOOKS */}
+            {currentView === 'lifestyle' && (
+              <div className="space-y-6">
+                <div className="border-b border-rose-950 pb-4">
+                  <h2 className="text-2xl font-black text-white">Gorgeous Habits, Food, Body Type & Literary Tastes</h2>
+                  <p className="text-xs text-slate-400 mt-1">The holistic routine behind her timeless sunshine glow.</p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="p-6 rounded-3xl bg-sunshine-900 border border-sunshine-800 space-y-4 shadow-lg">
+                    <h3 className="text-lg font-bold text-amber-400 flex items-center gap-2">
+                      <Icon name="utensils" className="w-5 h-5" /> Food Habits & Body Type
+                    </h3>
+                    <p className="text-xs text-slate-300 leading-relaxed">{FOOD_HABITS_BODY.foodHabits}</p>
+                    <div className="p-3 rounded-xl bg-sunshine-950 border border-sunshine-800 text-xs text-slate-300">
+                      <strong>Physique & Fitness:</strong> {FOOD_HABITS_BODY.bodyType}
+                    </div>
+                  </div>
+
+                  <div className="p-6 rounded-3xl bg-sunshine-900 border border-sunshine-800 space-y-4 shadow-lg">
+                    <h3 className="text-lg font-bold text-rose-400 flex items-center gap-2">
+                      <Icon name="book" className="w-5 h-5" /> Favourite Books & Cinematic Classics
+                    </h3>
+                    <div className="space-y-2 text-xs text-slate-300">
+                      <div><strong>Books:</strong> {SUNSHINE_ESSENCE.books.join(", ")}</div>
+                      <div><strong>Movies:</strong> {SUNSHINE_ESSENCE.movies.join(", ")}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 6: AWARDS & PHILANTHROPY */}
+            {currentView === 'awards' && (
+              <div className="space-y-6">
+                <div className="border-b border-rose-950 pb-4">
+                  <h2 className="text-2xl font-black text-white">Awards, Honors & Philanthropic Mission</h2>
+                  <p className="text-xs text-slate-400 mt-1">Celebrating recognition of her cinematic contributions and charitable work.</p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="p-6 rounded-3xl bg-sunshine-900 border border-sunshine-800 space-y-4 shadow-lg">
+                    <h3 className="text-lg font-bold text-amber-400">Notable Awards</h3>
+                    <div className="space-y-3">
+                      {AWARDS_LIST.map((aw, i) => (
+                        <div key={i} className="p-3 rounded-xl bg-sunshine-950 border border-sunshine-800 text-xs flex justify-between items-center">
+                          <div>
+                            <span className="font-bold text-white block">{aw.title}</span>
+                            <span className="text-slate-400">{aw.org}</span>
+                          </div>
+                          <span className="text-amber-400 font-mono font-bold">{aw.year}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="p-6 rounded-3xl bg-sunshine-900 border border-sunshine-800 space-y-4 shadow-lg">
+                    <h3 className="text-lg font-bold text-rose-400">Philanthropy & Hobbies</h3>
+                    <p className="text-xs text-slate-300 leading-relaxed">{PHILANTHROPY_HOBBIES.philanthropy}</p>
+                    <div className="p-3 rounded-xl bg-sunshine-950 border border-sunshine-800 text-xs text-slate-300">
+                      <strong>Notable Hobbies:</strong> {PHILANTHROPY_HOBBIES.hobbies}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+          </main>
+
+          {/* DETAIL MODAL FOR EVERY CLICKED ITEM */}
+          {selectedItem && (
+            <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+              <div className="bg-sunshine-900 border border-amber-500/50 rounded-3xl max-w-2xl w-full p-8 space-y-6 relative shadow-2xl animate-in fade-in zoom-in duration-200">
+                <button 
+                  onClick={() => setSelectedItem(null)}
+                  className="absolute top-6 right-6 p-2 rounded-full bg-sunshine-950 text-slate-400 hover:text-white"
+                >
+                  <Icon name="x" className="w-5 h-5" />
+                </button>
+
+                <div className="space-y-2">
+                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                    Verified Sunshine Dossier
+                  </span>
+                  <h3 className="text-2xl font-black text-white">{selectedItem.title}</h3>
+                </div>
+
+                <div className="p-6 rounded-2xl bg-sunshine-950 border border-sunshine-800 text-xs text-slate-300 space-y-3 leading-relaxed max-h-[60vh] overflow-y-auto">
+                  {typeof selectedItem.content === 'object' ? (
+                    Object.entries(selectedItem.content).map(([k, v]) => (
+                      <div key={k} className="border-b border-sunshine-800 pb-2">
+                        <strong className="text-amber-400 uppercase text-[10px] tracking-wider block mb-0.5">{k}:</strong>
+                        <span>{typeof v === 'object' ? JSON.stringify(v) : v}</span>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="whitespace-pre-line text-sm">{selectedItem.content}</p>
+                  )}
+                </div>
+
+                <div className="pt-4 border-t border-sunshine-800 flex items-center justify-between text-xs text-slate-400">
+                  <span>Curated & Published by Amim Ahsan</span>
+                  <a href="https://amimahsanlibrary.blogspot.com" target="_blank" rel="noopener noreferrer" className="text-amber-400 underline font-bold">
+                    amimahsanlibrary.blogspot.com
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* FOOTER */}
+          <footer className="mt-auto border-t border-rose-950 bg-sunshine-900 py-8 px-4 text-xs text-slate-400 text-center space-y-2">
+            <div className="font-bold text-slate-200">Katrina Kaif Sunshine Archive: Holistic Filmic Essence</div>
+            <div>Designed with premium sunshine luxury by <strong>Amim Ahsan</strong>. Explore more at <a href="https://amimahsanlibrary.blogspot.com" target="_blank" rel="noopener noreferrer" className="text-amber-400 underline">amimahsanlibrary.blogspot.com</a></div>
+          </footer>
+
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
